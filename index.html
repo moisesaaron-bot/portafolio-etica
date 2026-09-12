@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Nombre del Portafolio] — Portafolio Digital HUM-010</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #142B4D;
+    --navy-soft:  #24487C;
+    --gold:       #B08A3E;
+    --gold-soft:  #E4D3A3;
+    --gold-pale:  #F6EFDD;
+    --bg:         #FBF9F5;
+    --white:      #FFFFFF;
+    --line:       #E7E1D3;
+    --text:       #21262B;
+    --muted:      #6E6459;
+    --cream:      #F4EFE4;
+    --teal:       #2F5D57;
+    --terra:      #9C5A45;
+    --serif:      'Cormorant Garamond', Georgia, serif;
+    --sans:       'Inter', -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html{scroll-behavior:smooth;}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  a{color:inherit;} img,svg{max-width:100%; display:block;}
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.01ms !important; transition-duration:.01ms !important;} }
+
+  /* ─── progress ─── */
+  #progress{position:fixed; top:0; left:0; height:2px; width:0%; background:var(--gold); z-index:200; transition:width .1s linear;}
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    background: rgba(251,249,245,0.94); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 0 56px; height: 70px;
+  }
+  @media (max-width:760px){ nav{padding:0 22px; height:62px;} }
+  .nav-brand{display:flex; align-items:baseline; gap:11px;}
+  .nav-logo{font-family:var(--serif); font-size:1.42rem; font-weight:600; color:var(--navy); letter-spacing:0.01em;}
+  .nav-logo span{color:var(--gold); font-style:italic; font-weight:500;}
+  .nav-sub{font-size:0.64rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); font-weight:500; border-left:1px solid var(--line); padding-left:11px;}
+  @media (max-width:640px){ .nav-sub{display:none;} }
+  .nav-links{display:flex; gap:2px; list-style:none;}
+  .nav-links a{
+    display:block; padding:8px 16px; font-size:0.7rem; font-weight:600;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--muted);
+    text-decoration:none; border-radius:2px; transition:color .2s;
+    position:relative;
+  }
+  .nav-links a::after{content:""; position:absolute; left:16px; right:16px; bottom:4px; height:1px; background:var(--gold); transform:scaleX(0); transition:transform .25s ease; transform-origin:left;}
+  .nav-links a:hover{color:var(--navy);}
+  .nav-links a:hover::after, .nav-links a.active::after{transform:scaleX(1);}
+  .nav-links a.active{color:var(--navy);}
+
+  /* ─── SECTIONS ─── */
+  section{padding:130px 56px 96px; min-height:100vh; display:flex; flex-direction:column; justify-content:center;}
+  section.alt{background:var(--cream);}
+  @media (max-width:760px){ section{padding:110px 24px 72px;} }
+
+  .reveal{opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ─── HERO ─── */
+  #inicio{background:var(--white); position:relative; overflow:hidden;}
+  #inicio::before{
+    content:""; position:absolute; top:-160px; right:-140px; width:640px; height:640px; border-radius:50%;
+    background: radial-gradient(circle, rgba(176,138,62,0.09) 0%, transparent 68%); pointer-events:none;
+  }
+  #inicio::after{
+    content:""; position:absolute; bottom:-100px; left:-90px; width:420px; height:420px; border-radius:50%;
+    background: radial-gradient(circle, rgba(20,43,77,0.06) 0%, transparent 68%); pointer-events:none;
+  }
+  .hero-inner{max-width:920px; position:relative; z-index:1;}
+  .hero-badge{
+    display:inline-flex; align-items:center; gap:9px; font-size:0.68rem; font-weight:700;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:30px;
+  }
+  .hero-badge::before{content:""; width:26px; height:1px; background:var(--gold);}
+  .hero-title{
+    font-family:var(--serif); font-size:clamp(3rem,7vw,5.4rem); font-weight:300; line-height:0.98;
+    color:var(--navy); letter-spacing:-0.01em; margin-bottom:10px;
+  }
+  .hero-title em{font-style:italic; color:var(--gold); font-weight:500;}
+  .hero-subtitle{font-family:var(--serif); font-size:1.4rem; font-weight:400; font-style:italic; color:var(--muted); margin-bottom:34px;}
+  .hero-rule{width:70px; height:1px; background:var(--gold); margin-bottom:34px; position:relative;}
+  .hero-rule::after{content:"✦"; position:absolute; left:82px; top:-8px; color:var(--gold); font-size:0.75rem;}
+  .hero-desc{font-size:1.02rem; color:var(--muted); line-height:1.85; max-width:600px; margin-bottom:44px;}
+  .hero-meta{display:flex; gap:40px; flex-wrap:wrap;}
+  .hero-meta-item{display:flex; flex-direction:column; gap:4px;}
+  .hero-meta-label{font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); font-weight:700;}
+  .hero-meta-val{font-family:var(--serif); font-size:1.02rem; color:var(--navy); font-weight:500;}
+  .hero-scroll{margin-top:60px; display:flex; align-items:center; gap:13px; color:var(--muted); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:500;}
+  .hero-scroll-line{width:52px; height:1px; background:var(--gold);}
+  .editable{background:var(--gold-pale); outline:1px dashed var(--gold); border-radius:2px; padding:1px 5px;}
+
+  /* ─── SECTION HEADERS ─── */
+  .sec-header{margin-bottom:52px;}
+  .sec-tag{font-size:0.66rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:12px;}
+  .sec-tag::before{content:""; width:30px; height:1px; background:var(--gold);}
+  .sec-title{font-family:var(--serif); font-size:clamp(2.2rem,4.4vw,3.1rem); font-weight:300; color:var(--navy); line-height:1.12; letter-spacing:-0.01em;}
+  .sec-title em{font-style:italic; color:var(--gold);}
+  .sec-lead{font-size:0.95rem; color:var(--muted); line-height:1.75; max-width:580px; margin-top:14px;}
+
+  .guide-box{background:var(--white); border:1px dashed var(--line); border-radius:4px; padding:18px 22px; margin-bottom:32px; max-width:660px;}
+  .guide-box span{font-size:0.63rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--navy-soft); font-weight:700; display:block; margin-bottom:6px;}
+  .guide-box p{font-size:0.84rem; color:var(--muted); line-height:1.6;}
+
+  /* ─── EQUIPO ─── */
+  .team-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  @media (max-width:920px){ .team-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:580px){ .team-grid{grid-template-columns:1fr;} }
+  .team-card{background:var(--white); border:1px solid var(--line); border-radius:6px; overflow:hidden; transition:box-shadow .3s, transform .3s;}
+  .team-card:hover{box-shadow:0 22px 44px rgba(20,43,77,0.1); transform:translateY(-4px);}
+  .team-photo{width:100%; aspect-ratio:1; background:linear-gradient(135deg,var(--cream) 0%, #ECE4D3 100%); display:flex; align-items:center; justify-content:center; position:relative;}
+  .team-photo-mark{font-family:var(--serif); font-size:2.6rem; font-style:italic; color:var(--gold-soft); font-weight:500;}
+  .team-photo-label{position:absolute; bottom:10px; left:12px; font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); background:rgba(255,255,255,0.85); padding:3px 8px; border-radius:2px;}
+  .team-info{padding:20px 20px 22px;}
+  .team-name{font-family:var(--serif); font-size:1.18rem; font-weight:600; color:var(--navy); margin-bottom:4px;}
+  .team-role{font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:10px;}
+  .team-bio{font-size:0.82rem; color:var(--muted); line-height:1.6; margin-bottom:14px;}
+  .team-li{display:inline-flex; align-items:center; gap:6px; background:var(--bg); border:1px solid var(--line); color:var(--navy-soft); font-size:0.66rem; font-weight:600; letter-spacing:0.06em; padding:5px 11px; border-radius:2px; text-decoration:none; transition:background .2s, border-color .2s;}
+  .team-li:hover{background:var(--gold-pale); border-color:var(--gold);}
+
+  /* ─── MANIFIESTO ─── */
+  .manifesto-layout{display:grid; grid-template-columns:1fr 1.85fr; gap:72px; align-items:start;}
+  @media (max-width:920px){ .manifesto-layout{grid-template-columns:1fr; gap:44px;} }
+  .manifesto-sidebar{position:sticky; top:100px;}
+  @media (max-width:920px){ .manifesto-sidebar{position:static;} }
+
+  .values-label{font-size:0.63rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-top:22px; margin-bottom:14px;}
+  .manifesto-values{display:flex; flex-direction:column; gap:2px;}
+  .value-item{padding:16px 4px; border-bottom:1px solid var(--line); cursor:pointer; transition:padding-left .2s;}
+  .value-item:first-child{border-top:1px solid var(--line);}
+  .value-item:hover{padding-left:8px;}
+  .value-head{display:flex; align-items:baseline; gap:14px;}
+  .value-rank{font-family:var(--serif); font-size:1.5rem; font-style:italic; color:var(--gold); font-weight:500; flex-shrink:0; width:26px;}
+  .value-name{font-family:var(--serif); font-size:1.05rem; font-weight:600; color:var(--navy);}
+  .value-type{font-size:0.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-top:2px;}
+  .value-note{font-size:0.8rem; color:var(--muted); margin-top:0; margin-left:40px; max-height:0; overflow:hidden; transition:max-height .35s ease, margin-top .35s ease;}
+  .value-item.open .value-note{max-height:140px; margin-top:8px;}
+
+  .manifesto-metaphor{background:var(--white); border:1px solid var(--line); border-top:2px solid var(--gold); padding:34px 36px 30px; margin-bottom:34px; border-radius:2px; position:relative;}
+  .manifesto-metaphor::before{content:"“"; position:absolute; top:8px; left:20px; font-family:var(--serif); font-size:3.4rem; color:var(--gold-soft); line-height:1;}
+  .manifesto-metaphor-label{font-size:0.63rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:16px;}
+  .manifesto-metaphor-text{font-family:var(--serif); font-size:1.42rem; font-style:italic; color:var(--navy); line-height:1.55; font-weight:400; padding-left:8px;}
+
+  .manifesto-block{margin-bottom:30px;}
+  .manifesto-block h4{font-family:var(--serif); font-size:1.22rem; font-weight:600; color:var(--navy); margin-bottom:12px; display:flex; align-items:center; gap:12px;}
+  .manifesto-block h4::after{content:""; flex:1; height:1px; background:var(--line);}
+  .manifesto-block p{font-size:0.92rem; color:var(--muted); line-height:1.85;}
+
+  .vuln-tags{display:flex; flex-wrap:wrap; gap:9px; margin-top:12px;}
+  .vuln-tag{background:var(--white); border:1px solid var(--line); color:var(--navy); font-size:0.76rem; font-weight:500; padding:6px 14px; border-radius:2px;}
+
+  .critmap{display:flex; flex-direction:column; gap:14px; margin-top:16px;}
+  .crit-row{display:grid; grid-template-columns:1fr 30px 1fr; background:var(--white); border:1px solid var(--line); border-radius:3px; overflow:hidden;}
+  @media (max-width:640px){ .crit-row{grid-template-columns:1fr;} }
+  .crit-side{padding:16px 18px;}
+  .crit-side.neg{border-right:1px solid var(--line); border-left:2px solid var(--terra);}
+  @media (max-width:640px){ .crit-side.neg{border-right:none; border-bottom:1px solid var(--line);} }
+  .crit-side.pos{border-left:2px solid var(--teal);}
+  @media (max-width:640px){ .crit-side.pos{border-left:2px solid var(--teal);} }
+  .crit-side .tag{font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700; margin-bottom:6px; display:block;}
+  .crit-side.neg .tag{color:var(--terra);}
+  .crit-side.pos .tag{color:var(--teal);}
+  .crit-side p{font-size:0.85rem; color:var(--muted); line-height:1.6;}
+  .crit-arrow{display:flex; align-items:center; justify-content:center; color:var(--gold); font-family:var(--serif); font-style:italic; font-size:1.1rem;}
+
+  /* ─── FOOTER ─── */
+  footer{background:var(--navy); color:rgba(255,255,255,0.62); padding:48px 56px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  @media (max-width:760px){ footer{padding:36px 24px; flex-direction:column; align-items:flex-start;} }
+  .footer-brand{font-family:var(--serif); font-size:1.3rem; font-weight:300; color:white;}
+  .footer-brand em{color:var(--gold-soft); font-style:italic;}
+  .footer-meta{font-size:0.76rem; letter-spacing:0.03em; line-height:1.7;}
+  .footer-meta span{color:var(--gold-soft);}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo">[Nombre] <span>[Portafolio]</span></div>
+    <div class="nav-sub">Portafolio Digital · HUM-010</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#inicio" data-id="inicio" class="active">Inicio</a></li>
+    <li><a href="#equipo" data-id="equipo">Equipo</a></li>
+    <li><a href="#manifiesto" data-id="manifiesto">Manifiesto</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════ INICIO ══════════════ -->
+<section id="inicio">
+  <div class="hero-inner">
+    <div class="hero-badge">Ética y Deontología Profesional · 2026-II</div>
+
+    <div class="hero-title">[Nombre]<br><em>[del Portafolio]</em></div>
+    <div class="hero-subtitle">Portafolio Digital de Identidad Ética Profesional</div>
+
+    <div class="hero-rule"></div>
+
+    <p class="hero-desc editable">[Frase de portada: 2–3 líneas sobre lo que representa este Manifiesto para el equipo como futuros ingenieros empresariales y de sistemas.]</p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item"><div class="hero-meta-label">Curso</div><div class="hero-meta-val">Ética y Deontología Profesional</div></div>
+      <div class="hero-meta-item"><div class="hero-meta-label">Carrera</div><div class="hero-meta-val">Ingeniería Empresarial y de Sistemas</div></div>
+      <div class="hero-meta-item"><div class="hero-meta-label">Ciclo</div><div class="hero-meta-val">2026-II</div></div>
+      <div class="hero-meta-item"><div class="hero-meta-label">Docente</div><div class="hero-meta-val editable">[Nombre del docente]</div></div>
+    </div>
+
+    <div class="hero-scroll"><div class="hero-scroll-line"></div>Explorar el portafolio</div>
+  </div>
+</section>
+
+<!-- ══════════════ EQUIPO (6 integrantes) ══════════════ -->
+<section class="alt reveal" id="equipo">
+  <div class="sec-header">
+    <div class="sec-tag">Nuestro equipo</div>
+    <div class="sec-title">Quiénes <em>somos</em></div>
+    <div class="sec-lead editable">Seis estudiantes de Ingeniería Empresarial y de Sistemas comprometidos con una práctica profesional íntegra, responsable y consciente de su impacto en la sociedad peruana.</div>
+  </div>
+
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-photo"><div class="team-photo-mark">Ⓔ</div><div class="team-photo-label">Foto del estudiante</div></div>
+      <div class="team-info">
+        <div class="team-name editable">[Nombre Apellido]</div>
+        <div class="team-role">Ing. Empresarial y de Sistemas</div>
+        <div class="team-bio editable">[Breve reseña: intereses, motivación ética y aporte al equipo.]</div>
+        <a class="team-li" href="https://linkedin.com/in/usuario" target="_blank">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo"><div class="team-photo-mark">Ⓔ</div><div class="team-photo-label">Foto del estudiante</div></div>
+      <div class="team-info">
+        <div class="team-name editable">[Nombre Apellido]</div>
+        <div class="team-role">Ing. Empresarial y de Sistemas</div>
+        <div class="team-bio editable">[Breve reseña del estudiante.]</div>
+        <a class="team-li" href="https://linkedin.com/in/usuario" target="_blank">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo"><div class="team-photo-mark">Ⓔ</div><div class="team-photo-label">Foto del estudiante</div></div>
+      <div class="team-info">
+        <div class="team-name editable">[Nombre Apellido]</div>
+        <div class="team-role">Ing. Empresarial y de Sistemas</div>
+        <div class="team-bio editable">[Breve reseña del estudiante.]</div>
+        <a class="team-li" href="https://linkedin.com/in/usuario" target="_blank">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo"><div class="team-photo-mark">Ⓔ</div><div class="team-photo-label">Foto del estudiante</div></div>
+      <div class="team-info">
+        <div class="team-name editable">[Nombre Apellido]</div>
+        <div class="team-role">Ing. Empresarial y de Sistemas</div>
+        <div class="team-bio editable">[Breve reseña del estudiante.]</div>
+        <a class="team-li" href="https://linkedin.com/in/usuario" target="_blank">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo"><div class="team-photo-mark">Ⓔ</div><div class="team-photo-label">Foto del estudiante</div></div>
+      <div class="team-info">
+        <div class="team-name editable">[Nombre Apellido]</div>
+        <div class="team-role">Ing. Empresarial y de Sistemas</div>
+        <div class="team-bio editable">[Breve reseña del estudiante.]</div>
+        <a class="team-li" href="https://linkedin.com/in/usuario" target="_blank">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo"><div class="team-photo-mark">Ⓔ</div><div class="team-photo-label">Foto del estudiante</div></div>
+      <div class="team-info">
+        <div class="team-name editable">[Nombre Apellido]</div>
+        <div class="team-role">Ing. Empresarial y de Sistemas</div>
+        <div class="team-bio editable">[Breve reseña del estudiante.]</div>
+        <a class="team-li" href="https://linkedin.com/in/usuario" target="_blank">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ MANIFIESTO (AC1–AC4, EC1 · Semana 5) ══════════════ -->
+<section class="reveal" id="manifiesto">
+  <div class="manifesto-layout">
+
+    <div class="manifesto-sidebar">
+      <div class="sec-tag">Módulo I · Semana 5</div>
+      <div class="sec-title">Manifiesto de<br><em>Identidad Ética</em></div>
+      <div class="sec-lead">Nuestra declaración de propósito profesional: quiénes somos, qué valores guían nuestro ejercicio y a quiénes nos comprometemos a proteger.</div>
+
+      <div class="values-label">Jerarquía de valores · Max Scheler · AC3</div>
+      <div class="manifesto-values">
+        <div class="value-item open">
+          <div class="value-head"><div class="value-rank">I</div><div><div class="value-name">Sensibles</div><div class="value-type">Agradable / desagradable</div></div></div>
+          <div class="value-note editable">[Ejemplo de este nivel aplicado a su carrera.]</div>
+        </div>
+        <div class="value-item">
+          <div class="value-head"><div class="value-rank">II</div><div><div class="value-name">Vitales</div><div class="value-type">Noble / vulgar</div></div></div>
+          <div class="value-note editable">[Ejemplo de este nivel aplicado a su carrera.]</div>
+        </div>
+        <div class="value-item">
+          <div class="value-head"><div class="value-rank">III</div><div><div class="value-name">Espirituales</div><div class="value-type">Justo / injusto · bello / feo</div></div></div>
+          <div class="value-note editable">[Ejemplo de este nivel aplicado a su carrera.]</div>
+        </div>
+        <div class="value-item">
+          <div class="value-head"><div class="value-rank">IV</div><div><div class="value-name">De lo santo</div><div class="value-type">Santo / profano</div></div></div>
+          <div class="value-note editable">[Ejemplo de este nivel aplicado a su carrera.]</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="manifesto-content">
+
+      <div class="manifesto-metaphor">
+        <div class="manifesto-metaphor-label">Metáfora artística del propósito profesional · AC1</div>
+        <div class="manifesto-metaphor-text editable">[Describan aquí la metáfora artística elegida por el equipo y su relación con el propósito de la Ingeniería Empresarial y de Sistemas — conectada con el telos y la areté aristotélicos.]</div>
+      </div>
+
+      <div class="guide-box">
+        <span>Qué va en cada bloque</span>
+        <p>Propósito: 2–3 párrafos citando telos/areté. Poblaciones vulnerables: 3–5 grupos propios de la carrera. Mapa crítico: 3–5 pares negligencia → aporte, anclados en casos peruanos verificables.</p>
+      </div>
+
+      <div class="manifesto-block">
+        <h4>Propósito profesional</h4>
+        <p class="editable">[Redacten el propósito colectivo del equipo: qué tipo de profesionales quieren ser, cuál es su telos y cómo entienden la areté en Ingeniería Empresarial y de Sistemas.]</p>
+      </div>
+
+      <div class="manifesto-block">
+        <h4>Poblaciones vulnerables que protegemos · AC2</h4>
+        <div class="vuln-tags">
+          <div class="vuln-tag editable">[Población 1]</div>
+          <div class="vuln-tag editable">[Población 2]</div>
+          <div class="vuln-tag editable">[Población 3]</div>
+          <div class="vuln-tag editable">[Población 4]</div>
+        </div>
+        <p style="margin-top:14px;" class="editable">[Expliquen por qué estas poblaciones son relevantes para el ejercicio ético de su carrera y el compromiso que asumen frente a cada una.]</p>
+      </div>
+
+      <div class="manifesto-block">
+        <h4>Mapa crítico profesional · AC4</h4>
+        <div class="critmap">
+          <div class="crit-row">
+            <div class="crit-side neg"><span class="tag">Negligencia</span><p class="editable">[Descripción de la negligencia profesional.]</p></div>
+            <div class="crit-arrow">→</div>
+            <div class="crit-side pos"><span class="tag">Aporte</span><p class="editable">[Qué proponen hacer distinto.]</p></div>
+          </div>
+          <div class="crit-row">
+            <div class="crit-side neg"><span class="tag">Negligencia</span><p class="editable">[Descripción de la negligencia profesional.]</p></div>
+            <div class="crit-arrow">→</div>
+            <div class="crit-side pos"><span class="tag">Aporte</span><p class="editable">[Qué proponen hacer distinto.]</p></div>
+          </div>
+          <div class="crit-row">
+            <div class="crit-side neg"><span class="tag">Negligencia</span><p class="editable">[Descripción de la negligencia profesional.]</p></div>
+            <div class="crit-arrow">→</div>
+            <div class="crit-side pos"><span class="tag">Aporte</span><p class="editable">[Qué proponen hacer distinto.]</p></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div>
+    <div class="footer-brand">[Nombre] <em>[Portafolio]</em></div>
+    <div style="margin-top:8px; font-size:0.78rem;">Portafolio Digital · HUM-010 · Universidad Científica del Sur · 2026-II</div>
+  </div>
+  <div class="footer-meta">
+    Elaborado por: <span class="editable">[Nombres del equipo]</span><br>
+    Docente responsable: <span class="editable">[Nombre del docente]</span>
+  </div>
+</footer>
+
+<script>
+  // active nav + scroll progress
+  const ids = ['inicio','equipo','manifiesto'];
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', ()=>{
+    let cur = ids[0];
+    ids.forEach(id=>{ const s=document.getElementById(id); if(s && window.scrollY >= s.offsetTop - 140) cur = id; });
+    links.forEach(a=> a.classList.toggle('active', a.dataset.id===cur));
+    const h = document.documentElement;
+    const pct = (h.scrollTop)/(h.scrollHeight - h.clientHeight)*100;
+    document.getElementById('progress').style.width = pct+'%';
+  });
+
+  // reveal on scroll
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // value items expand
+  document.querySelectorAll('.value-item').forEach(item=>{
+    item.addEventListener('click', ()=> item.classList.toggle('open'));
+  });
+</script>
+</body>
+</html>
